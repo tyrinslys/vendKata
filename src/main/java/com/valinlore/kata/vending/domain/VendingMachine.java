@@ -1,18 +1,21 @@
 package com.valinlore.kata.vending.domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
 public class VendingMachine {
 	static final String DEFAULT_DISPLAY = "INSERT COIN";
 	private String display = DEFAULT_DISPLAY;
-	private Collection<Coin> coinReturn;
+	private Collection<Coin> coinReturn = new ArrayList<>();
+	private Collection<Coin> coinBin;
 
 	/** 
 	 * This is how you add money to the machine. If a coin is rejected it will be returned from this method.
 	 * @param coin Null if coin is added to the machine tally.
 	 */
 	public Coin insert(Coin coin) {
+		display = "Got coin";
 		return null;
 	}
 
