@@ -1,3 +1,14 @@
 package com.valinlore.kata.vending.domain;
 
-public enum Coin {quarter, dime, nickel, penny}
+public class Coin {
+	int weight;
+	int size;
+
+	/**
+	 * @param weight In miligrams
+	 * @param size in millimeters
+	 */
+	public Coin(int weight, int size) {
+
+	}
+}
