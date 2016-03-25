@@ -2,7 +2,7 @@ package com.valinlore.kata.vending.domain;
 
 public class VendingMachine {
 	static final String DEFAULT_DISPLAY = "INSERT COIN";
-	private String display;
+	private String display = DEFAULT_DISPLAY;
 
 	/** 
 	 * This is how you add money to the machine. If a coin is rejected it will be returned from this method.
