@@ -39,6 +39,8 @@ public class VendingMachineTest {
 		vendingMachine.insert(coin );
 		// Then: Insert coin message goes away
 		assertThat(vendingMachine.getDisplay(), not(INSERT_COIN));
+		// and: display updated to coin amount
+		assertThat(vendingMachine.getDisplay(), is("$0.25"));
 		// and: coin is accepted (no coins in the coin return)
 		assertThat(vendingMachine.peekCoinReturn(), emptyCollectionOf(Coin.class));
 	}
