@@ -45,7 +45,7 @@ public class VendingMachineTest {
 		assertThat(vendingMachine.peekCoinReturn(), emptyCollectionOf(Coin.class));
 	}
 
-	private Coin createCoin(AcceptedCoinTypes acceptedCoin) {
-		return new Coin(acceptedCoin.weight(), acceptedCoin.size());
+	static Coin createCoin(AcceptedCoinTypes acceptedCoin) {
+		return new Coin(acceptedCoin.getWeightInMilligrams(), acceptedCoin.getSizeInMicroMeters());
 	}
 }
