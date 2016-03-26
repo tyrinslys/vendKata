@@ -18,9 +18,12 @@ public class VendingMachine {
 	 * @param coin
 	 */
 	public void insert(Coin coin) {
-		display = "Got coin";
 		AcceptedCoinTypes determinedCoinType = CoinUtils.determineCoinType(coin);
-		updateDisplay(determinedCoinType);
+		if(determinedCoinType == null){
+			coinReturn.add(coin);
+		} else {
+			updateDisplay(determinedCoinType);
+		}
 	}
 
 	private void updateDisplay(AcceptedCoinTypes determinedCoinType) {
