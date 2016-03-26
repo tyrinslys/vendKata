@@ -4,15 +4,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
-import javax.print.attribute.IntegerSyntax;
-
-import org.apache.commons.math3.util.IntegerSequence;
 import org.apache.commons.math3.util.IntegerSequence.Range;
 import org.junit.Test;
 import org.junit.runner.RunWith;
