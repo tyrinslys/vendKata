@@ -15,6 +15,7 @@ public class CoinUtilsTest {
 		// then: quarter should be the type returned
 		assertThat(returnCoin, is(AcceptedCoinTypes.QUARTER));
 	}
+
 	@Test
 	public void testValidateDime() {
 		// given: a perfect dime
@@ -24,6 +25,7 @@ public class CoinUtilsTest {
 		// then: dime should be the type returned
 		assertThat(returnCoin, is(AcceptedCoinTypes.DIME));
 	}
+
 	@Test
 	public void testValidateNickel() {
 		// given: a perfect nickel
@@ -33,28 +35,34 @@ public class CoinUtilsTest {
 		// then: nickel should be the type returned
 		assertThat(returnCoin, is(AcceptedCoinTypes.NICKEL));
 	}
+
 	@Test
-	public void testThatCoinQuarterSizeButNotWeightReturnsNull(){
+	public void testThatCoinQuarterSizeButNotWeightReturnsNull() {
 		// given: a coin just over weight of a quarter.
-		Coin coin = VendingMachineTest.createCoin(AcceptedCoinTypes.QUARTER, 1, 0);
+		Coin coin = VendingMachineTest.createCoin(AcceptedCoinTypes.QUARTER,
+				AcceptedCoinTypes.QUARTER.getWeightTolerance() + 1, 0);
 		// when: validate coin
 		AcceptedCoinTypes returnCoin = CoinUtils.determineCoinType(coin);
 		// then: null should be returned
 		assertThat(returnCoin, nullValue());
 	}
+
 	@Test
-	public void testThatCoinDimeSizeButNotWeightReturnsNull(){
+	public void testThatCoinDimeSizeButNotWeightReturnsNull() {
 		// given: a coin just over weight of a dime.
-		Coin coin = VendingMachineTest.createCoin(AcceptedCoinTypes.DIME, 1, 0);
+		Coin coin = VendingMachineTest.createCoin(AcceptedCoinTypes.DIME,
+				AcceptedCoinTypes.DIME.getWeightTolerance() + 1, 0);
 		// when: validate coin
 		AcceptedCoinTypes returnCoin = CoinUtils.determineCoinType(coin);
 		// then: null should be returned
 		assertThat(returnCoin, nullValue());
 	}
+
 	@Test
-	public void testThatCoinNickelSizeButNotWeightReturnsNull(){
+	public void testThatCoinNickelSizeButNotWeightReturnsNull() {
 		// given: a coin just over weight of a nickel.
-		Coin coin = VendingMachineTest.createCoin(AcceptedCoinTypes.NICKEL, 1, 0);
+		Coin coin = VendingMachineTest.createCoin(AcceptedCoinTypes.NICKEL,
+				AcceptedCoinTypes.NICKEL.getWeightTolerance() + 1, 0);
 		// when: validate coin
 		AcceptedCoinTypes returnCoin = CoinUtils.determineCoinType(coin);
 		// then: null should be returned

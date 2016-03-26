@@ -6,30 +6,76 @@ public class CoinUtils {
 	private static final Range<Integer> QUARTER_SIZE_RANGE;
 	private static final Range<Integer> DIME_SIZE_RANGE;
 	private static final Range<Integer> NICKEL_SIZE_RANGE;
+	private static final Range<Integer> QUARTER_WEIGHT_RANGE;
+	private static final Range<Integer> DIME_WEIGHT_RANGE;
+	private static final Range<Integer> NICKEL_WEIGHT_RANGE;
 
 	static {
 		{ // setup for quarter
-			int perfectQuarterSize = AcceptedCoinTypes.QUARTER.getSizeInMicroMeters();
-			int quarterSizeTolerance = AcceptedCoinTypes.QUARTER.getSizeTolerance();
+			AcceptedCoinTypes quarter = AcceptedCoinTypes.QUARTER;
+			int perfectQuarterSize = quarter.getSizeInMicroMeters();
+			int quarterSizeTolerance = quarter.getSizeTolerance();
 			QUARTER_SIZE_RANGE = Range.between(perfectQuarterSize - quarterSizeTolerance,
 					perfectQuarterSize + quarterSizeTolerance);
+
+			int perfectQuarterWeight = quarter.getWeightInMilligrams();
+			int quarterWeightTolerance = quarter.getWeightTolerance();
+			QUARTER_WEIGHT_RANGE = Range.between(perfectQuarterWeight - quarterWeightTolerance,
+					perfectQuarterWeight + quarterWeightTolerance);
 		}
 		{ // setup for dime
-			int perfectDimeSize = AcceptedCoinTypes.DIME.getSizeInMicroMeters();
-			int dimeSizeTolerance = AcceptedCoinTypes.DIME.getSizeTolerance();
+			AcceptedCoinTypes dime = AcceptedCoinTypes.DIME;
+			int perfectDimeSize = dime.getSizeInMicroMeters();
+			int dimeSizeTolerance = dime.getSizeTolerance();
 			DIME_SIZE_RANGE = Range.between(perfectDimeSize - dimeSizeTolerance, perfectDimeSize + dimeSizeTolerance);
+
+			int perfectDimeWeight = dime.getWeightInMilligrams();
+			int dimeWeightTolerance = dime.getWeightTolerance();
+			DIME_WEIGHT_RANGE = Range.between(perfectDimeWeight - dimeWeightTolerance,
+					perfectDimeWeight + dimeWeightTolerance);
 		}
 		{ // setup for nickel
-			int perfectNickelSize = AcceptedCoinTypes.NICKEL.getSizeInMicroMeters();
-			int nickelSizeTolerance = AcceptedCoinTypes.NICKEL.getSizeTolerance();
+			AcceptedCoinTypes nickel = AcceptedCoinTypes.NICKEL;
+			int perfectNickelSize = nickel.getSizeInMicroMeters();
+			int nickelSizeTolerance = nickel.getSizeTolerance();
 			NICKEL_SIZE_RANGE = Range.between(perfectNickelSize - nickelSizeTolerance,
 					perfectNickelSize + nickelSizeTolerance);
+
+			int perfectNickelWeight = nickel.getWeightInMilligrams();
+			int nickelWeightTolerance = nickel.getWeightTolerance();
+			NICKEL_WEIGHT_RANGE = Range.between(perfectNickelWeight - nickelWeightTolerance,
+					perfectNickelWeight + nickelWeightTolerance);
 		}
 	}
 
 	public static AcceptedCoinTypes determineCoinType(Coin coin) {
 		AcceptedCoinTypes sizeFits = checkSize(coin);
-		return sizeFits;
+		if (sizeFits == null) {
+			return null;
+		}
+
+		AcceptedCoinTypes weightFits = checkWeight(coin);
+		if (weightFits == null) {
+			return null;
+		}
+
+		if (sizeFits.equals(weightFits)) {
+			return sizeFits;
+		} else {
+			return null;
+		}
+	}
+
+	private static AcceptedCoinTypes checkWeight(Coin coin) {
+		if (QUARTER_WEIGHT_RANGE.contains(coin.getWeight())) {
+			return AcceptedCoinTypes.QUARTER;
+		} else if (DIME_WEIGHT_RANGE.contains(coin.getWeight())) {
+			return AcceptedCoinTypes.DIME;
+		} else if (NICKEL_WEIGHT_RANGE.contains(coin.getWeight())) {
+			return AcceptedCoinTypes.NICKEL;
+		} else {
+			return null;
+		}
 	}
 
 	private static AcceptedCoinTypes checkSize(Coin coin) {
