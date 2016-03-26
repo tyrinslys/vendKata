@@ -80,16 +80,38 @@ public class VendingMachineTest {
 	public void rejectedCoins_testPenny() {
 		// Setup: a coin for future use
 		Coin coin = new Penny();
-
+		
 		// Given: a vending machine with no coins.
 		VendingMachine vendingMachine = new VendingMachine();
 		// When: insert a coin
 		vendingMachine.insert(coin);
-		// Then: Insert coin message goes away
+		// Then: Insert coin message stays
+		assertThat(vendingMachine.getDisplay(), is(INSERT_COIN));
+		// and: coin is accepted (one coins in the coin return)
+		assertThat(vendingMachine.peekCoinReturn(), hasSize(1));
+		
+	}
+	@Test
+	public void rejectedCoins_testPenny_canRemoveFromMachine() {
+		// Setup: a coin for future use
+		Coin coin = new Penny();
+		
+		// Given: a vending machine with no coins.
+		VendingMachine vendingMachine = new VendingMachine();
+		// and: insert a coin
+		vendingMachine.insert(coin);
+		// When: I can remove the coin from the machine
+		Coin coinFromReturn = vendingMachine.takeCoinFromReturn();
+		// Then: coin is the same one I passed in
+		assertThat(coinFromReturn, sameInstance(coin));
+		// and: Insert coin message still around
 		assertThat(vendingMachine.getDisplay(), is(INSERT_COIN));
 		// and: coin is accepted (no coins in the coin return)
-		assertThat(vendingMachine.peekCoinReturn(), hasSize(1));
+		assertThat(vendingMachine.peekCoinReturn(), emptyCollectionOf(Coin.class));
+		
 	}
+	// and: 
+
 
 	static Coin createCoin(AcceptedCoinTypes acceptedCoin) {
 		return createCoin(acceptedCoin, 0, 0);
