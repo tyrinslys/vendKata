@@ -6,19 +6,20 @@ package com.valinlore.kata.vending.domain;
  *
  */
 public enum AcceptedCoinTypes {
-	QUARTER(25, 40, 5, 100, 20),//FIXME: these numbers are guesses. Maybe there are some numbers from the internet I can plug in to be more realistic.
-	DIME(10, 15, 2, 10, 4),
-	NICKEL(5, 25, 4, 25, 6);
+	// These sizes were pulled from the US mint website. tolerances are calculated to be %1
+	QUARTER(25, 5670, 57, 24260, 243),
+	DIME(10, 2268, 23, 17910, 179),
+	NICKEL(5, 5000, 50, 21210, 212);
 	private int cents;
 	private int weightInMilligrams;
 	private int weightTolerance;
-	private int sizeInMicroMeters;
+	private int diameterInMicroMeters; //(diameter)
 	private int sizeTolerance;
 	private AcceptedCoinTypes(int cents,int weightInMilligrams, int weightTolerance, int sizeInMicroMeters, int sizeTolerance) {
 		this.cents = cents;
 		this.weightInMilligrams = weightInMilligrams;
 		this.weightTolerance = weightTolerance;
-		this.sizeInMicroMeters = sizeInMicroMeters;
+		this.diameterInMicroMeters = sizeInMicroMeters;
 		this.sizeTolerance = sizeTolerance;
 
 	}
@@ -31,10 +32,10 @@ public enum AcceptedCoinTypes {
 	public int getWeightTolerance() {
 		return weightTolerance;
 	}
-	public int getSizeInMicroMeters() {
-		return sizeInMicroMeters;
+	public int getDiameterInMicroMeters() {
+		return diameterInMicroMeters;
 	}
-	public int getSizeTolerance() {
+	public int getDiameterTolerance() {
 		return sizeTolerance;
 	}
 }

@@ -83,6 +83,6 @@ public class VendingMachineTest {
 
 	static Coin createCoin(AcceptedCoinTypes acceptedCoin, int addWeight, int addSize) {
 		return new Coin(acceptedCoin.getWeightInMilligrams() + addWeight,
-				acceptedCoin.getSizeInMicroMeters() + addSize);
+				acceptedCoin.getDiameterInMicroMeters() + addSize);
 	}
 }

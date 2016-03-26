@@ -6,7 +6,7 @@ public class Coin {
 
 	/**
 	 * @param weight
-	 *            In miligrams
+	 *            In micrograms
 	 * @param size
 	 *            in micrometers
 	 */
