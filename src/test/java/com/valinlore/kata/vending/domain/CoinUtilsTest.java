@@ -37,7 +37,7 @@ public class CoinUtilsTest {
 	}
 
 	@Test
-	public void testThatCoinQuarterSizeButNotWeightReturnsNull() {
+	public void testCoinNotMatched_quarterOverWeight() {
 		// given: a coin just over weight of a quarter.
 		Coin coin = VendingMachineTest.createCoin(AcceptedCoinTypes.QUARTER,
 				AcceptedCoinTypes.QUARTER.getWeightTolerance() + 1, 0);
@@ -48,7 +48,7 @@ public class CoinUtilsTest {
 	}
 
 	@Test
-	public void testThatCoinDimeSizeButNotWeightReturnsNull() {
+	public void testCoinNotMatched_dimeOverWeight() {
 		// given: a coin just over weight of a dime.
 		Coin coin = VendingMachineTest.createCoin(AcceptedCoinTypes.DIME,
 				AcceptedCoinTypes.DIME.getWeightTolerance() + 1, 0);
@@ -59,7 +59,7 @@ public class CoinUtilsTest {
 	}
 
 	@Test
-	public void testThatCoinNickelSizeButNotWeightReturnsNull() {
+	public void testCoinNotMatched_nickelOverWeight() {
 		// given: a coin just over weight of a nickel.
 		Coin coin = VendingMachineTest.createCoin(AcceptedCoinTypes.NICKEL,
 				AcceptedCoinTypes.NICKEL.getWeightTolerance() + 1, 0);
@@ -70,7 +70,7 @@ public class CoinUtilsTest {
 	}
 
 	@Test
-	public void testThatCoinQuarterWeightButNotSizeReturnsNull() {
+	public void testCoinNotMatched_quarterOverSized() {
 		// given: a coin just over size of a quarter.
 		Coin coin = VendingMachineTest.createCoin(AcceptedCoinTypes.QUARTER, 0,
 				AcceptedCoinTypes.QUARTER.getSizeTolerance() + 1);
@@ -80,7 +80,7 @@ public class CoinUtilsTest {
 		assertThat(returnCoin, nullValue());
 	}
 	@Test
-	public void testThatCoinDimeWeightButNotSizeReturnsNull() {
+	public void testCoinNotMatched_dimeOverSized() {
 		// given: a coin just over size of a dime.
 		Coin coin = VendingMachineTest.createCoin(AcceptedCoinTypes.DIME, 0,
 				AcceptedCoinTypes.DIME.getSizeTolerance() + 1);
@@ -90,7 +90,7 @@ public class CoinUtilsTest {
 		assertThat(returnCoin, nullValue());
 	}
 	@Test
-	public void testThatCoinNickelWeightButNotSizeReturnsNull() {
+	public void testCoinNotMatched_nickelOverSized() {
 		// given: a coin just over size of a nickel.
 		Coin coin = VendingMachineTest.createCoin(AcceptedCoinTypes.NICKEL, 0,
 				AcceptedCoinTypes.NICKEL.getSizeTolerance() + 1);
