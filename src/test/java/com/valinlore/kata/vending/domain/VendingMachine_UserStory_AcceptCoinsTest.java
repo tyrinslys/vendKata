@@ -12,7 +12,7 @@ import static org.hamcrest.Matchers.*;
  * @author Tiris Valinlore
  *
  */
-public class VendingMachineTest {
+public class VendingMachine_UserStory_AcceptCoinsTest {
 
 	private static final String INSERT_COIN = "INSERT COIN";
 
