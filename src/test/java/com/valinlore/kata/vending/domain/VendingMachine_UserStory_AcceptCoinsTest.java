@@ -2,6 +2,7 @@ package com.valinlore.kata.vending.domain;
 
 import org.junit.Test;
 
+import static com.valinlore.kata.vending.domain.VendingMachineTestUtils.*;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 
@@ -9,12 +10,12 @@ import static org.hamcrest.Matchers.*;
  * This test is for the kata found
  * <a href="https://github.com/guyroyse/vending-machine-kata">here</a>.
  * 
+ * This one is for the 'Accept Coins' user story
+ * 
  * @author Tiris Valinlore
  *
  */
 public class VendingMachine_UserStory_AcceptCoinsTest {
-
-	private static final String INSERT_COIN = "INSERT COIN";
 
 	/**
 	 * This test is for the user story titled "Accept Coins"
@@ -44,6 +45,7 @@ public class VendingMachine_UserStory_AcceptCoinsTest {
 		// and: coin is accepted (no coins in the coin return)
 		assertThat(vendingMachine.peekCoinReturn(), emptyCollectionOf(Coin.class));
 	}
+
 	@Test
 	public void acceptCoins_testDime() {
 		// Setup: a coin for future use
@@ -60,6 +62,7 @@ public class VendingMachine_UserStory_AcceptCoinsTest {
 		// and: coin is accepted (no coins in the coin return)
 		assertThat(vendingMachine.peekCoinReturn(), emptyCollectionOf(Coin.class));
 	}
+
 	@Test
 	public void acceptCoins_testNickel() {
 		// Setup: a coin for future use
@@ -76,11 +79,12 @@ public class VendingMachine_UserStory_AcceptCoinsTest {
 		// and: coin is accepted (no coins in the coin return)
 		assertThat(vendingMachine.peekCoinReturn(), emptyCollectionOf(Coin.class));
 	}
+
 	@Test
 	public void rejectedCoins_testPenny() {
 		// Setup: a coin for future use
 		Coin coin = new Penny();
-		
+
 		// Given: a vending machine with no coins.
 		VendingMachine vendingMachine = new VendingMachine();
 		// When: insert a coin
@@ -89,13 +93,14 @@ public class VendingMachine_UserStory_AcceptCoinsTest {
 		assertThat(vendingMachine.getDisplay(), is(INSERT_COIN));
 		// and: coin is accepted (one coins in the coin return)
 		assertThat(vendingMachine.peekCoinReturn(), hasSize(1));
-		
+
 	}
+
 	@Test
 	public void rejectedCoins_testPenny_canRemoveRejectedCoin() {
 		// Setup: a coin for future use
 		Coin coin = new Penny();
-		
+
 		// Given: a vending machine with no coins.
 		VendingMachine vendingMachine = new VendingMachine();
 		// and: insert a coin
@@ -108,21 +113,5 @@ public class VendingMachine_UserStory_AcceptCoinsTest {
 		assertThat(vendingMachine.getDisplay(), is(INSERT_COIN));
 		// and: coin is accepted (no coins in the coin return)
 		assertThat(vendingMachine.peekCoinReturn(), emptyCollectionOf(Coin.class));
-	}
-
-	static Coin createCoin(AcceptedCoinTypes acceptedCoin) {
-		return createCoin(acceptedCoin, 0, 0);
-	}
-
-	static Coin createCoin(AcceptedCoinTypes acceptedCoin, int addWeight, int addSize) {
-		return new Coin(acceptedCoin.getWeightInMilligrams() + addWeight,
-				acceptedCoin.getDiameterInMicroMeters() + addSize);
-	}
-	public static class Penny extends Coin {
-		private static final int PENNY_WEIGHT = 2500; // miligrams
-		private static final int PENNY_DIAMETER = 19050; // micrometers
-		public Penny(){
-			super(PENNY_WEIGHT, PENNY_DIAMETER);
-		}
 	}
 }
