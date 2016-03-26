@@ -30,13 +30,13 @@ public class VendingMachineTest {
 
 	@Test
 	public void acceptCoins_testThatAccepQuarters() {
-		//Setup: a coin for future use
+		// Setup: a coin for future use
 		Coin coin = createCoin(AcceptedCoinTypes.QUARTER);
-		
+
 		// Given: a vending machine with no coins.
 		VendingMachine vendingMachine = new VendingMachine();
 		// When: insert a coin
-		vendingMachine.insert(coin );
+		vendingMachine.insert(coin);
 		// Then: Insert coin message goes away
 		assertThat(vendingMachine.getDisplay(), not(INSERT_COIN));
 		// and: display updated to coin amount
@@ -46,6 +46,11 @@ public class VendingMachineTest {
 	}
 
 	static Coin createCoin(AcceptedCoinTypes acceptedCoin) {
-		return new Coin(acceptedCoin.getWeightInMilligrams(), acceptedCoin.getSizeInMicroMeters());
+		return createCoin(acceptedCoin, 0, 0);
+	}
+
+	static Coin createCoin(AcceptedCoinTypes acceptedCoin, int addWeight, int addSize) {
+		return new Coin(acceptedCoin.getWeightInMilligrams() + addWeight,
+				acceptedCoin.getSizeInMicroMeters() + addSize);
 	}
 }
