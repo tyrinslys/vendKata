@@ -68,4 +68,35 @@ public class CoinUtilsTest {
 		// then: null should be returned
 		assertThat(returnCoin, nullValue());
 	}
+
+	@Test
+	public void testThatCoinQuarterWeightButNotSizeReturnsNull() {
+		// given: a coin just over size of a quarter.
+		Coin coin = VendingMachineTest.createCoin(AcceptedCoinTypes.QUARTER, 0,
+				AcceptedCoinTypes.QUARTER.getSizeTolerance() + 1);
+		// when: validate coin
+		AcceptedCoinTypes returnCoin = CoinUtils.determineCoinType(coin);
+		// then: null should be returned
+		assertThat(returnCoin, nullValue());
+	}
+	@Test
+	public void testThatCoinDimeWeightButNotSizeReturnsNull() {
+		// given: a coin just over size of a dime.
+		Coin coin = VendingMachineTest.createCoin(AcceptedCoinTypes.DIME, 0,
+				AcceptedCoinTypes.DIME.getSizeTolerance() + 1);
+		// when: validate coin
+		AcceptedCoinTypes returnCoin = CoinUtils.determineCoinType(coin);
+		// then: null should be returned
+		assertThat(returnCoin, nullValue());
+	}
+	@Test
+	public void testThatCoinNickelWeightButNotSizeReturnsNull() {
+		// given: a coin just over size of a nickel.
+		Coin coin = VendingMachineTest.createCoin(AcceptedCoinTypes.NICKEL, 0,
+				AcceptedCoinTypes.NICKEL.getSizeTolerance() + 1);
+		// when: validate coin
+		AcceptedCoinTypes returnCoin = CoinUtils.determineCoinType(coin);
+		// then: null should be returned
+		assertThat(returnCoin, nullValue());
+	}
 }
