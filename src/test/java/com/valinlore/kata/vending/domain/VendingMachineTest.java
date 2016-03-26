@@ -29,7 +29,7 @@ public class VendingMachineTest {
 	}
 
 	@Test
-	public void acceptCoins_testThatAccepQuarters() {
+	public void acceptCoins_testQuarter() {
 		// Setup: a coin for future use
 		Coin coin = createCoin(AcceptedCoinTypes.QUARTER);
 
@@ -41,6 +41,38 @@ public class VendingMachineTest {
 		assertThat(vendingMachine.getDisplay(), not(INSERT_COIN));
 		// and: display updated to coin amount
 		assertThat(vendingMachine.getDisplay(), is("$0.25"));
+		// and: coin is accepted (no coins in the coin return)
+		assertThat(vendingMachine.peekCoinReturn(), emptyCollectionOf(Coin.class));
+	}
+	@Test
+	public void acceptCoins_testDime() {
+		// Setup: a coin for future use
+		Coin coin = createCoin(AcceptedCoinTypes.DIME);
+
+		// Given: a vending machine with no coins.
+		VendingMachine vendingMachine = new VendingMachine();
+		// When: insert a coin
+		vendingMachine.insert(coin);
+		// Then: Insert coin message goes away
+		assertThat(vendingMachine.getDisplay(), not(INSERT_COIN));
+		// and: display updated to coin amount
+		assertThat(vendingMachine.getDisplay(), is("$0.10"));
+		// and: coin is accepted (no coins in the coin return)
+		assertThat(vendingMachine.peekCoinReturn(), emptyCollectionOf(Coin.class));
+	}
+	@Test
+	public void acceptCoins_testNickel() {
+		// Setup: a coin for future use
+		Coin coin = createCoin(AcceptedCoinTypes.NICKEL);
+
+		// Given: a vending machine with no coins.
+		VendingMachine vendingMachine = new VendingMachine();
+		// When: insert a coin
+		vendingMachine.insert(coin);
+		// Then: Insert coin message goes away
+		assertThat(vendingMachine.getDisplay(), not(INSERT_COIN));
+		// and: display updated to coin amount
+		assertThat(vendingMachine.getDisplay(), is("$0.05"));
 		// and: coin is accepted (no coins in the coin return)
 		assertThat(vendingMachine.peekCoinReturn(), emptyCollectionOf(Coin.class));
 	}
