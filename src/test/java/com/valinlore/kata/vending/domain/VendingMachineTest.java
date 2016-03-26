@@ -92,7 +92,7 @@ public class VendingMachineTest {
 		
 	}
 	@Test
-	public void rejectedCoins_testPenny_canRemoveFromMachine() {
+	public void rejectedCoins_testPenny_canRemoveRejectedCoin() {
 		// Setup: a coin for future use
 		Coin coin = new Penny();
 		
@@ -108,10 +108,7 @@ public class VendingMachineTest {
 		assertThat(vendingMachine.getDisplay(), is(INSERT_COIN));
 		// and: coin is accepted (no coins in the coin return)
 		assertThat(vendingMachine.peekCoinReturn(), emptyCollectionOf(Coin.class));
-		
 	}
-	// and: 
-
 
 	static Coin createCoin(AcceptedCoinTypes acceptedCoin) {
 		return createCoin(acceptedCoin, 0, 0);
