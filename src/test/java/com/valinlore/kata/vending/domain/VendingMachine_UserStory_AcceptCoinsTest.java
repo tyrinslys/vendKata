@@ -26,7 +26,7 @@ public class VendingMachine_UserStory_AcceptCoinsTest {
 		VendingMachine vendingMachine = new VendingMachine();
 		// When: no coins have been added.
 		// Then: insert coin message is displayed
-		assertThat(vendingMachine.getDisplay(), is(INSERT_COIN));
+		assertThat(vendingMachine.viewDisplay(), is(INSERT_COIN));
 	}
 
 	@Test
@@ -39,9 +39,9 @@ public class VendingMachine_UserStory_AcceptCoinsTest {
 		// When: insert a coin
 		vendingMachine.insert(coin);
 		// Then: Insert coin message goes away
-		assertThat(vendingMachine.getDisplay(), not(INSERT_COIN));
+		assertThat(vendingMachine.viewDisplay(), not(INSERT_COIN));
 		// and: display updated to coin amount
-		assertThat(vendingMachine.getDisplay(), is("$0.25"));
+		assertThat(vendingMachine.viewDisplay(), is("$0.25"));
 		// and: coin is accepted (no coins in the coin return)
 		assertThat(vendingMachine.peekCoinReturn(), emptyCollectionOf(Coin.class));
 	}
@@ -56,9 +56,9 @@ public class VendingMachine_UserStory_AcceptCoinsTest {
 		// When: insert a coin
 		vendingMachine.insert(coin);
 		// Then: Insert coin message goes away
-		assertThat(vendingMachine.getDisplay(), not(INSERT_COIN));
+		assertThat(vendingMachine.viewDisplay(), not(INSERT_COIN));
 		// and: display updated to coin amount
-		assertThat(vendingMachine.getDisplay(), is("$0.10"));
+		assertThat(vendingMachine.viewDisplay(), is("$0.10"));
 		// and: coin is accepted (no coins in the coin return)
 		assertThat(vendingMachine.peekCoinReturn(), emptyCollectionOf(Coin.class));
 	}
@@ -73,9 +73,9 @@ public class VendingMachine_UserStory_AcceptCoinsTest {
 		// When: insert a coin
 		vendingMachine.insert(coin);
 		// Then: Insert coin message goes away
-		assertThat(vendingMachine.getDisplay(), not(INSERT_COIN));
+		assertThat(vendingMachine.viewDisplay(), not(INSERT_COIN));
 		// and: display updated to coin amount
-		assertThat(vendingMachine.getDisplay(), is("$0.05"));
+		assertThat(vendingMachine.viewDisplay(), is("$0.05"));
 		// and: coin is accepted (no coins in the coin return)
 		assertThat(vendingMachine.peekCoinReturn(), emptyCollectionOf(Coin.class));
 	}
@@ -90,7 +90,7 @@ public class VendingMachine_UserStory_AcceptCoinsTest {
 		// When: insert a coin
 		vendingMachine.insert(coin);
 		// Then: Insert coin message stays
-		assertThat(vendingMachine.getDisplay(), is(INSERT_COIN));
+		assertThat(vendingMachine.viewDisplay(), is(INSERT_COIN));
 		// and: coin is accepted (one coins in the coin return)
 		assertThat(vendingMachine.peekCoinReturn(), hasSize(1));
 
@@ -110,7 +110,7 @@ public class VendingMachine_UserStory_AcceptCoinsTest {
 		// Then: coin is the same one I passed in
 		assertThat(coinFromReturn, sameInstance(coin));
 		// and: Insert coin message still around
-		assertThat(vendingMachine.getDisplay(), is(INSERT_COIN));
+		assertThat(vendingMachine.viewDisplay(), is(INSERT_COIN));
 		// and: coin is accepted (no coins in the coin return)
 		assertThat(vendingMachine.peekCoinReturn(), emptyCollectionOf(Coin.class));
 	}

@@ -6,15 +6,16 @@ import java.util.Collections;
 import java.util.Iterator;
 
 public class VendingMachine {
-	private static final String PRICE_COLA = "$1.00";
-	private static final String PRICE_CHIPS = "$0.50";
-	private static final String PRICE_CANDY = "$0.65";
+	private static final int PRICE_COLA = 100;
+	private static final int PRICE_CHIPS = 50;
+	private static final int PRICE_CANDY = 65;
 	static final String DEFAULT_DISPLAY = "INSERT COIN";
 	private String display = DEFAULT_DISPLAY;
 	private Collection<Coin> coinReturn = new ArrayList<>();
 	private Collection<Coin> internalCoinBin = new ArrayList<>();
 	private int centsTallied;
 	private boolean resetDisplay;
+	private boolean displaySwapped;
 
 	/**
 	 * This is how you add money to the machine. If a coin is rejected it will
@@ -34,7 +35,7 @@ public class VendingMachine {
 
 	private void updateDisplay(AcceptedCoinTypes determinedCoinType) {
 		this.centsTallied += determinedCoinType.getCents();
-		this.display = String.format("$%.2f", centsTallied / 100d);
+		setPriceOnDisplay(centsTallied);
 	}
 
 	/**
@@ -43,18 +44,28 @@ public class VendingMachine {
 	 * 
 	 * @return gaurenteed not null
 	 */
-	public String getDisplay() {
-		if (resetDisplay) {
-			display = DEFAULT_DISPLAY;
-			resetDisplay = false;
-		}
-		switch (display) {
-		case PRICE_COLA:
-		case PRICE_CHIPS:
-		case PRICE_CANDY:
+	public String viewDisplay() {
+		if (displaySwapped) {
+			if (resetDisplay) {
+				resetDisplay();
+				resetDisplay = false;
+				displaySwapped = false;
+			}
 			resetDisplay = true;
 		}
 		return display;
+	}
+
+	private void resetDisplay() {
+		if (centsTallied > 0) {
+			setPriceOnDisplay(centsTallied);
+		} else {
+			display = DEFAULT_DISPLAY;
+		}
+	}
+
+	private void setPriceOnDisplay(int priceInCents) {
+		this.display = String.format("$%.2f", priceInCents / 100d);
 	}
 
 	public Collection<Coin> peekCoinReturn() {
@@ -72,14 +83,17 @@ public class VendingMachine {
 	}
 
 	public void pressColaButton() {
-		display = PRICE_COLA;
+		setPriceOnDisplay(PRICE_COLA);
+		this.displaySwapped = true;
 	}
 
 	public void pressCandyButton() {
-		display = PRICE_CANDY;
+		setPriceOnDisplay(PRICE_CANDY);
+		this.displaySwapped = true;
 	}
 
 	public void pressChipsButton() {
-		display = PRICE_CHIPS;
+		setPriceOnDisplay(PRICE_CHIPS);
+		this.displaySwapped = true;
 	}
 }

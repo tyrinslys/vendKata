@@ -27,9 +27,9 @@ public class VendingMachine_UserStory_SelectProductTest {
 		// When: insert a coin
 		vendingMachine.pressColaButton();
 		// Then: Price of cola is displayed
-		assertThat(vendingMachine.getDisplay(), is(PRICE_COLA));
+		assertThat(vendingMachine.viewDisplay(), is(PRICE_COLA));
 		// and: on second look display is back to default message
-		assertThat(vendingMachine.getDisplay(), is(INSERT_COIN));
+		assertThat(vendingMachine.viewDisplay(), is(INSERT_COIN));
 	}
 
 	@Test
@@ -43,9 +43,9 @@ public class VendingMachine_UserStory_SelectProductTest {
 		// When: insert a coin
 		vendingMachine.pressColaButton();
 		// Then: Price of cola is displayed
-		assertThat(vendingMachine.getDisplay(), is(PRICE_COLA));
+		assertThat(vendingMachine.viewDisplay(), is(PRICE_COLA));
 		// and: on second look display is back to default message
-		assertThat(vendingMachine.getDisplay(), is("$0.75"));
+		assertThat(vendingMachine.viewDisplay(), is("$0.75"));
 	}
 
 	@Test
@@ -55,9 +55,9 @@ public class VendingMachine_UserStory_SelectProductTest {
 		// When: insert a coin
 		vendingMachine.pressChipsButton();
 		// Then: Price of chips is displayed
-		assertThat(vendingMachine.getDisplay(), is(PRICE_CHIPS));
+		assertThat(vendingMachine.viewDisplay(), is(PRICE_CHIPS));
 		// and: on second look display is back to default message
-		assertThat(vendingMachine.getDisplay(), is(INSERT_COIN));
+		assertThat(vendingMachine.viewDisplay(), is(INSERT_COIN));
 	}
 
 	@Test
@@ -67,9 +67,9 @@ public class VendingMachine_UserStory_SelectProductTest {
 		// When: insert a coin
 		vendingMachine.pressCandyButton();
 		// Then: Price of candy is displayed
-		assertThat(vendingMachine.getDisplay(), is(PRICE_CANDY));
+		assertThat(vendingMachine.viewDisplay(), is(PRICE_CANDY));
 		// and: on second look display is back to default message
-		assertThat(vendingMachine.getDisplay(), is(INSERT_COIN));
+		assertThat(vendingMachine.viewDisplay(), is(INSERT_COIN));
 	}
 
 }
