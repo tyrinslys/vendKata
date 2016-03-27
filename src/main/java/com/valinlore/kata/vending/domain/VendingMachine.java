@@ -55,4 +55,9 @@ public class VendingMachine {
 		}
 		return coin;
 	}
+
+	public void pressColaButton() {
+		// TODO Auto-generated method stub
+		
+	}
 }
