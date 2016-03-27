@@ -17,7 +17,7 @@ import static org.hamcrest.Matchers.*;
  */
 public class VendingMachine_UserStory_SelectProductTest {
 	public static final String PRICE_COLA = "$1.00";
-	public static final String PRICE_CHIPS = "$$0.50";
+	public static final String PRICE_CHIPS = "$0.50";
 	public static final String PRICE_CANDY = "$0.65";
 
 	@Test

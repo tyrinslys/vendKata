@@ -7,6 +7,8 @@ import java.util.Iterator;
 
 public class VendingMachine {
 	private static final String PRICE_COLA = "$1.00";
+	private static final String PRICE_CHIPS = "$0.50";
+	private static final String PRICE_CANDY = "$0.65";
 	static final String DEFAULT_DISPLAY = "INSERT COIN";
 	private String display = DEFAULT_DISPLAY;
 	private Collection<Coin> coinReturn = new ArrayList<>();
@@ -44,8 +46,12 @@ public class VendingMachine {
 	public String getDisplay() {
 		if (resetDisplay) {
 			display = DEFAULT_DISPLAY;
+			resetDisplay = false;
 		}
-		if (display == PRICE_COLA) {
+		switch (display) {
+		case PRICE_COLA:
+		case PRICE_CHIPS:
+		case PRICE_CANDY:
 			resetDisplay = true;
 		}
 		return display;
@@ -70,12 +76,10 @@ public class VendingMachine {
 	}
 
 	public void pressCandyButton() {
-		// TODO Auto-generated method stub
-		
+		display = PRICE_CANDY;
 	}
 
 	public void pressChipsButton() {
-		// TODO Auto-generated method stub
-		
+		display = PRICE_CHIPS;
 	}
 }
