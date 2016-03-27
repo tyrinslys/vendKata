@@ -96,4 +96,9 @@ public class VendingMachine {
 		setPriceOnDisplay(PRICE_CHIPS);
 		this.displaySwapped = true;
 	}
+
+	public Product takeProduct() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

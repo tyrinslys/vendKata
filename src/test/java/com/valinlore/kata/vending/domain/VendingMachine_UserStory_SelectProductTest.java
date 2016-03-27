@@ -19,6 +19,7 @@ public class VendingMachine_UserStory_SelectProductTest {
 	public static final String PRICE_COLA = "$1.00";
 	public static final String PRICE_CHIPS = "$0.50";
 	public static final String PRICE_CANDY = "$0.65";
+	private static final Object THANK_YOU = "THANK YOU";
 
 	@Test
 	public void testDisplayPrice_cola() {
@@ -46,6 +47,25 @@ public class VendingMachine_UserStory_SelectProductTest {
 		assertThat(vendingMachine.viewDisplay(), is(PRICE_COLA));
 		// and: on second look display is back to amount inserted message
 		assertThat(vendingMachine.viewDisplay(), is("$0.75"));
+	}
+	@Test
+	public void testDespenseProduct_cola() {
+		// Given: a vending machine with 4 quarter coins.
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		
+		// When: press Cola button
+		vendingMachine.pressColaButton();
+		// Then: Cola is despensed
+		Product product = vendingMachine.takeProduct();
+		assertThat(product, sameInstance(Cola.class));
+		// and: Thank you message is displayed
+		assertThat(vendingMachine.viewDisplay(), is(THANK_YOU));
+		// and: on second look display is back to default message
+		assertThat(vendingMachine.viewDisplay(), is(INSERT_COIN));
 	}
 
 	@Test
