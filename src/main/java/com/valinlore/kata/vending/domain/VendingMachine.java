@@ -6,11 +6,13 @@ import java.util.Collections;
 import java.util.Iterator;
 
 public class VendingMachine {
+	private static final String PRICE_COLA = "$1.00";
 	static final String DEFAULT_DISPLAY = "INSERT COIN";
 	private String display = DEFAULT_DISPLAY;
 	private Collection<Coin> coinReturn = new ArrayList<>();
 	private Collection<Coin> internalCoinBin = new ArrayList<>();
 	private int centsTallied;
+	private boolean resetDisplay;
 
 	/**
 	 * This is how you add money to the machine. If a coin is rejected it will
@@ -40,6 +42,12 @@ public class VendingMachine {
 	 * @return gaurenteed not null
 	 */
 	public String getDisplay() {
+		if(resetDisplay){
+			display = DEFAULT_DISPLAY;
+		}
+		if(display == PRICE_COLA){
+			resetDisplay = true;
+		}
 		return display;
 	}
 
@@ -57,7 +65,6 @@ public class VendingMachine {
 	}
 
 	public void pressColaButton() {
-		// TODO Auto-generated method stub
-		
+		display = PRICE_COLA;
 	}
 }
