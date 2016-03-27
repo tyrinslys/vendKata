@@ -22,7 +22,7 @@ public class VendingMachine {
 	 */
 	public void insert(Coin coin) {
 		AcceptedCoinTypes determinedCoinType = CoinUtils.determineCoinType(coin);
-		if(determinedCoinType == null){
+		if (determinedCoinType == null) {
 			coinReturn.add(coin);
 		} else {
 			internalCoinBin.add(coin);
@@ -32,7 +32,7 @@ public class VendingMachine {
 
 	private void updateDisplay(AcceptedCoinTypes determinedCoinType) {
 		this.centsTallied += determinedCoinType.getCents();
-		this.display = String.format("$%.2f", centsTallied/100d);
+		this.display = String.format("$%.2f", centsTallied / 100d);
 	}
 
 	/**
@@ -42,10 +42,10 @@ public class VendingMachine {
 	 * @return gaurenteed not null
 	 */
 	public String getDisplay() {
-		if(resetDisplay){
+		if (resetDisplay) {
 			display = DEFAULT_DISPLAY;
 		}
-		if(display == PRICE_COLA){
+		if (display == PRICE_COLA) {
 			resetDisplay = true;
 		}
 		return display;
@@ -54,9 +54,10 @@ public class VendingMachine {
 	public Collection<Coin> peekCoinReturn() {
 		return Collections.unmodifiableCollection(coinReturn);
 	}
-	public Coin takeCoinFromReturn(){
+
+	public Coin takeCoinFromReturn() {
 		Coin coin = null;
-		if(coinReturn.size() >= 1){
+		if (coinReturn.size() >= 1) {
 			Iterator<Coin> iterator = coinReturn.iterator();
 			coin = iterator.next();
 			iterator.remove();
