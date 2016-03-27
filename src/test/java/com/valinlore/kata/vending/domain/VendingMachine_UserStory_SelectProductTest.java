@@ -33,6 +33,22 @@ public class VendingMachine_UserStory_SelectProductTest {
 	}
 
 	@Test
+	public void testDisplayPrice_cola_partialPayment() {
+		// Given: a vending machine with 3 quarter coins.
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+
+		// When: insert a coin
+		vendingMachine.pressColaButton();
+		// Then: Price of cola is displayed
+		assertThat(vendingMachine.getDisplay(), is(PRICE_COLA));
+		// and: on second look display is back to default message
+		assertThat(vendingMachine.getDisplay(), is("$0.75"));
+	}
+
+	@Test
 	public void testDisplayPrice_chips() {
 		// Given: a vending machine with no coins.
 		VendingMachine vendingMachine = new VendingMachine();
