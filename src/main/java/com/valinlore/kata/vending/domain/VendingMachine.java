@@ -68,4 +68,14 @@ public class VendingMachine {
 	public void pressColaButton() {
 		display = PRICE_COLA;
 	}
+
+	public void pressCandyButton() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void pressChipsButton() {
+		// TODO Auto-generated method stub
+		
+	}
 }

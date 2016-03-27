@@ -37,7 +37,7 @@ public class VendingMachine_UserStory_SelectProductTest {
 		// Given: a vending machine with no coins.
 		VendingMachine vendingMachine = new VendingMachine();
 		// When: insert a coin
-		vendingMachine.pressColaButton();
+		vendingMachine.pressChipsButton();
 		// Then: Price of chips is displayed
 		assertThat(vendingMachine.getDisplay(), is(PRICE_CHIPS));
 		// and: on second look display is back to default message
@@ -49,7 +49,7 @@ public class VendingMachine_UserStory_SelectProductTest {
 		// Given: a vending machine with no coins.
 		VendingMachine vendingMachine = new VendingMachine();
 		// When: insert a coin
-		vendingMachine.pressColaButton();
+		vendingMachine.pressCandyButton();
 		// Then: Price of candy is displayed
 		assertThat(vendingMachine.getDisplay(), is(PRICE_CANDY));
 		// and: on second look display is back to default message
