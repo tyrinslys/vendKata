@@ -24,7 +24,7 @@ public class VendingMachine_UserStory_SelectProductTest {
 	public void testDisplayPrice_cola() {
 		// Given: a vending machine with no coins.
 		VendingMachine vendingMachine = new VendingMachine();
-		// When: insert a coin
+		// When: press cola button
 		vendingMachine.pressColaButton();
 		// Then: Price of cola is displayed
 		assertThat(vendingMachine.viewDisplay(), is(PRICE_COLA));
@@ -40,7 +40,7 @@ public class VendingMachine_UserStory_SelectProductTest {
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
 
-		// When: insert a coin
+		// When: press Cola button
 		vendingMachine.pressColaButton();
 		// Then: Price of cola is displayed
 		assertThat(vendingMachine.viewDisplay(), is(PRICE_COLA));
@@ -52,7 +52,7 @@ public class VendingMachine_UserStory_SelectProductTest {
 	public void testDisplayPrice_chips() {
 		// Given: a vending machine with no coins.
 		VendingMachine vendingMachine = new VendingMachine();
-		// When: insert a coin
+		// When: pres chips button
 		vendingMachine.pressChipsButton();
 		// Then: Price of chips is displayed
 		assertThat(vendingMachine.viewDisplay(), is(PRICE_CHIPS));
@@ -64,7 +64,7 @@ public class VendingMachine_UserStory_SelectProductTest {
 	public void testDisplayPrice_candy() {
 		// Given: a vending machine with no coins.
 		VendingMachine vendingMachine = new VendingMachine();
-		// When: insert a coin
+		// When: press candy button
 		vendingMachine.pressCandyButton();
 		// Then: Price of candy is displayed
 		assertThat(vendingMachine.viewDisplay(), is(PRICE_CANDY));
