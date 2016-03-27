@@ -39,12 +39,12 @@ public class VendingMachine_UserStory_SelectProductTest {
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
-
+		
 		// When: press Cola button
 		vendingMachine.pressColaButton();
 		// Then: Price of cola is displayed
 		assertThat(vendingMachine.viewDisplay(), is(PRICE_COLA));
-		// and: on second look display is back to default message
+		// and: on second look display is back to amount inserted message
 		assertThat(vendingMachine.viewDisplay(), is("$0.75"));
 	}
 
@@ -59,6 +59,19 @@ public class VendingMachine_UserStory_SelectProductTest {
 		// and: on second look display is back to default message
 		assertThat(vendingMachine.viewDisplay(), is(INSERT_COIN));
 	}
+	@Test
+	public void testDisplayPrice_chips_partialPayment() {
+		// Given: a vending machine with 1 quarter coins.
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		
+		// When: press chips button
+		vendingMachine.pressChipsButton();
+		// Then: Price of cola is displayed
+		assertThat(vendingMachine.viewDisplay(), is(PRICE_CHIPS));
+		// and: on second look display is back to amount inserted message
+		assertThat(vendingMachine.viewDisplay(), is("$0.25"));
+	}
 
 	@Test
 	public void testDisplayPrice_candy() {
@@ -71,5 +84,18 @@ public class VendingMachine_UserStory_SelectProductTest {
 		// and: on second look display is back to default message
 		assertThat(vendingMachine.viewDisplay(), is(INSERT_COIN));
 	}
-
+	@Test
+	public void testDisplayPrice_candy_partialPayment() {
+		// Given: a vending machine with 3 quarter coins.
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		
+		// When: press Cola button
+		vendingMachine.pressCandyButton();
+		// Then: Price of cola is displayed
+		assertThat(vendingMachine.viewDisplay(), is(PRICE_CANDY));
+		// and: on second look display is back to amount inserted message
+		assertThat(vendingMachine.viewDisplay(), is("$0.50"));
+	}
 }
