@@ -61,7 +61,7 @@ public class VendingMachine_UserStory_SelectProductTest {
 		vendingMachine.pressColaButton();
 		// Then: Cola is despensed
 		Product product = vendingMachine.takeProduct();
-		assertThat(product, sameInstance(Cola.class));
+		assertThat(product, instanceOf(Cola.class));
 		// and: Thank you message is displayed
 		assertThat(vendingMachine.viewDisplay(), is(THANK_YOU));
 		// and: on second look display is back to default message
