@@ -9,13 +9,16 @@ public class VendingMachine {
 	private static final int PRICE_COLA = 100;
 	private static final int PRICE_CHIPS = 50;
 	private static final int PRICE_CANDY = 65;
-	static final String DEFAULT_DISPLAY = "INSERT COIN";
-	private String display = DEFAULT_DISPLAY;
-	private Collection<Coin> coinReturn = new ArrayList<>();
-	private Collection<Coin> internalCoinBin = new ArrayList<>();
+	private static final String MESSAGE_INSERT_COIN = "INSERT COIN";
+	private static final String MESSAGE_THANK_YOU = "THANK YOU";
+	private String display = MESSAGE_INSERT_COIN;
+	private Collection<Coin> coinReturn = new ArrayList<>(1);
+	private Collection<Coin> internalCoinBin = new ArrayList<>(1);
+	private Collection<Product> productBin = new ArrayList<>(1);
 	private int centsTallied;
 	private boolean resetDisplay;
 	private boolean displaySwapped;
+	private boolean displayThankYouMessage;
 
 	/**
 	 * This is how you add money to the machine. If a coin is rejected it will
@@ -45,7 +48,7 @@ public class VendingMachine {
 	 * @return gaurenteed not null
 	 */
 	public String viewDisplay() {
-		if (displaySwapped) {
+		if (displaySwapped || displayThankYouMessage) {
 			if (resetDisplay) {
 				resetDisplay();
 				resetDisplay = false;
@@ -60,7 +63,7 @@ public class VendingMachine {
 		if (centsTallied > 0) {
 			setPriceOnDisplay(centsTallied);
 		} else {
-			display = DEFAULT_DISPLAY;
+			display = MESSAGE_INSERT_COIN;
 		}
 	}
 
@@ -83,8 +86,36 @@ public class VendingMachine {
 	}
 
 	public void pressColaButton() {
-		setPriceOnDisplay(PRICE_COLA);
+		if (centsTallied >= PRICE_COLA) {
+			centsTallied -= PRICE_COLA;
+			productBin.add(new Cola());
+			makeChange();
+			display = MESSAGE_THANK_YOU;
+			displayThankYouMessage = true;
+		} else {
+			setPriceOnDisplay(PRICE_COLA);
+		}
 		this.displaySwapped = true;
+	}
+
+	private void makeChange() {
+		// TODO Auto-generated method stub
+		while (centsTallied > 0) {
+			AcceptedCoinTypes quarter = AcceptedCoinTypes.QUARTER;
+			AcceptedCoinTypes dime = AcceptedCoinTypes.DIME;
+			AcceptedCoinTypes nickel = AcceptedCoinTypes.NICKEL;
+			// at the moment assuming infinite change Muhahaha!
+			if (centsTallied >= quarter.getCents()) {
+				centsTallied -= quarter.getCents();
+				coinReturn.add(new Coin(quarter.getWeightInMilligrams(), quarter.getDiameterInMicroMeters()));
+			} else if (centsTallied >= dime.getCents()) {
+				centsTallied -= dime.getCents();
+				coinReturn.add(new Coin(dime.getWeightInMilligrams(), dime.getDiameterInMicroMeters()));
+			} else if (centsTallied >= nickel.getCents()) {
+				centsTallied -= nickel.getCents();
+				coinReturn.add(new Coin(nickel.getWeightInMilligrams(), nickel.getDiameterInMicroMeters()));
+			}
+		}
 	}
 
 	public void pressCandyButton() {
@@ -98,7 +129,12 @@ public class VendingMachine {
 	}
 
 	public Product takeProduct() {
-		// TODO Auto-generated method stub
-		return null;
+		Product product = null;
+		if (!productBin.isEmpty()) {
+			Iterator<Product> iterator = productBin.iterator();
+			product = iterator.next();
+			iterator.remove();
+		}
+		return product;
 	}
 }
