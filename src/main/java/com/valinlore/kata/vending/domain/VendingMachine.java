@@ -86,14 +86,27 @@ public class VendingMachine {
 	}
 
 	public void pressColaButton() {
-		if (centsTallied >= PRICE_COLA) {
-			centsTallied -= PRICE_COLA;
-			productBin.add(new Cola());
+		// Unlimited produt YAY!
+		attemptDespenseProduct(new Cola());
+	}
+
+	public void pressCandyButton() {
+		attemptDespenseProduct(new Candy());
+	}
+
+	public void pressChipsButton() {
+		attemptDespenseProduct(new Chips());
+	}
+
+	private void attemptDespenseProduct(Product product) {
+		if (centsTallied >= product.getCostOfProductInCents()) {
+			centsTallied -= product.getCostOfProductInCents();
+			productBin.add(product);
 			makeChange();
 			display = MESSAGE_THANK_YOU;
 			displayThankYouMessage = true;
 		} else {
-			setPriceOnDisplay(PRICE_COLA);
+			setPriceOnDisplay(product.getCostOfProductInCents());
 		}
 		this.displaySwapped = true;
 	}
@@ -116,16 +129,6 @@ public class VendingMachine {
 				coinReturn.add(new Coin(nickel.getWeightInMilligrams(), nickel.getDiameterInMicroMeters()));
 			}
 		}
-	}
-
-	public void pressCandyButton() {
-		setPriceOnDisplay(PRICE_CANDY);
-		this.displaySwapped = true;
-	}
-
-	public void pressChipsButton() {
-		setPriceOnDisplay(PRICE_CHIPS);
-		this.displaySwapped = true;
 	}
 
 	public Product takeProduct() {

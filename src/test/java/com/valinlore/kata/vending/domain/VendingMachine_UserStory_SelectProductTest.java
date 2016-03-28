@@ -139,6 +139,7 @@ public class VendingMachine_UserStory_SelectProductTest {
 		// and: on second look display is back to amount inserted message
 		assertThat(vendingMachine.viewDisplay(), is("$0.50"));
 	}
+
 	@Test
 	public void testDespenseProduct_candy() {
 		// Given: a vending machine with 4 quarter coins.
