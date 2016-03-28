@@ -136,4 +136,9 @@ public class VendingMachine {
 		}
 		return product;
 	}
+
+	public void pressCoinReturn() {
+		// TODO Auto-generated method stub
+
+	}
 }
