@@ -6,9 +6,6 @@ import java.util.Collections;
 import java.util.Iterator;
 
 public class VendingMachine {
-	private static final int PRICE_COLA = 100;
-	private static final int PRICE_CHIPS = 50;
-	private static final int PRICE_CANDY = 65;
 	private static final String MESSAGE_INSERT_COIN = "INSERT COIN";
 	private static final String MESSAGE_THANK_YOU = "THANK YOU";
 	private String display = MESSAGE_INSERT_COIN;
@@ -112,7 +109,6 @@ public class VendingMachine {
 	}
 
 	private void makeChange() {
-		// TODO Auto-generated method stub
 		while (centsTallied > 0) {
 			AcceptedCoinTypes quarter = AcceptedCoinTypes.QUARTER;
 			AcceptedCoinTypes dime = AcceptedCoinTypes.DIME;
