@@ -1,10 +1,14 @@
 package com.valinlore.kata.vending.domain;
 
+import org.hamcrest.Matcher;
 import org.junit.Test;
 
 import static com.valinlore.kata.vending.domain.VendingMachineTestUtils.*;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This test is for the kata found
@@ -20,36 +24,26 @@ public class VendingMachine_UserStory_ReturnCoinsTest  {
 	public void testCoinReturn() {
 		// Given: a vending machine with 5 quarter coins.
 		VendingMachine vendingMachine = new VendingMachine();
-		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
-		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
-		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
-		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
-		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		List<Matcher<Coin>> insertedCoinMatchers = new ArrayList<>();
+		for(int index = 0; index < 5; index++){
+			Coin coin = createCoin(AcceptedCoinTypes.QUARTER);
+			vendingMachine.insert(coin);
+			Matcher<Coin> coinMatcher = sameInstance(coin);
+			insertedCoinMatchers.add(coinMatcher);
+		}
 		// When: press coin Return button
 		vendingMachine.pressCoinReturn();
 		// Then: change is made
 		assertThat(vendingMachine.peekCoinReturn(), hasSize(5));
-		// and: you can grab coin
+		// and: you can grab all the coins that were inserted
+		List<Coin> returnCoins = new ArrayList<>();
 		Coin coinFromReturn = vendingMachine.takeCoinFromReturn();
-		assertThat(coinFromReturn.getWeight(), is(AcceptedCoinTypes.QUARTER.getWeightInMilligrams()));
-		assertThat(coinFromReturn.getSize(), is(AcceptedCoinTypes.QUARTER.getDiameterInMicroMeters()));
-		// and: you can grab coin
-		coinFromReturn = vendingMachine.takeCoinFromReturn();
-		assertThat(coinFromReturn.getWeight(), is(AcceptedCoinTypes.QUARTER.getWeightInMilligrams()));
-		assertThat(coinFromReturn.getSize(), is(AcceptedCoinTypes.QUARTER.getDiameterInMicroMeters()));
-		// and: you can grab coin
-		coinFromReturn = vendingMachine.takeCoinFromReturn();
-		assertThat(coinFromReturn.getWeight(), is(AcceptedCoinTypes.QUARTER.getWeightInMilligrams()));
-		assertThat(coinFromReturn.getSize(), is(AcceptedCoinTypes.QUARTER.getDiameterInMicroMeters()));
-		// and: you can grab coin
-		coinFromReturn = vendingMachine.takeCoinFromReturn();
-		assertThat(coinFromReturn.getWeight(), is(AcceptedCoinTypes.QUARTER.getWeightInMilligrams()));
-		assertThat(coinFromReturn.getSize(), is(AcceptedCoinTypes.QUARTER.getDiameterInMicroMeters()));
-		// and: you can grab coin
-		coinFromReturn = vendingMachine.takeCoinFromReturn();
-		assertThat(coinFromReturn.getWeight(), is(AcceptedCoinTypes.QUARTER.getWeightInMilligrams()));
-		assertThat(coinFromReturn.getSize(), is(AcceptedCoinTypes.QUARTER.getDiameterInMicroMeters()));
-		// and: no more coins in return
+		while(coinFromReturn != null){
+			returnCoins.add(coinFromReturn);
+			coinFromReturn = vendingMachine.takeCoinFromReturn();
+		}
+		assertThat(returnCoins, contains(insertedCoinMatchers));
+		// and: double check more coins in return
 		assertThat(vendingMachine.takeCoinFromReturn(), nullValue());
 		// and: display goes back to default message
 		assertThat(vendingMachine.viewDisplay(), is(INSERT_COIN));
