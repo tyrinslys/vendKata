@@ -19,9 +19,6 @@ import java.util.Collections;
  *
  */
 public class VendingMachine_UserStory_SoldOutTest {
-	public static final String PRICE_COLA = "$1.00";
-	public static final String PRICE_CHIPS = "$0.50";
-	public static final String PRICE_CANDY = "$0.65";
 	private static final Object SOLD_OUT = "SOLD OUT";
 
 	@Test
@@ -66,6 +63,100 @@ public class VendingMachine_UserStory_SoldOutTest {
 
 		// When: press Cola button
 		vendingMachine.pressColaButton();
+		// Then: sold out is displayed
+		assertThat(vendingMachine.viewDisplay(), is(SOLD_OUT));
+		// and: on second look display is back to default message
+		assertThat(vendingMachine.viewDisplay(), is("$1.00"));
+	}
+	@Test
+	public void testDisplaySoldOut_noPayment_chips() {
+		// Given: a vending machine with no coins and no chips.
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.setColaInventory(Collections.emptyList());
+		// When: press chips button
+		vendingMachine.pressChipsButton();
+		// Then: sold out is displayed
+		assertThat(vendingMachine.viewDisplay(), is(SOLD_OUT));
+		// and: on second look display is back to default message
+		assertThat(vendingMachine.viewDisplay(), is(INSERT_COIN));
+	}
+
+	@Test
+	public void testDisplaySoldOut_partialPayment_chips() {
+		// Given: a vending machine with 3 quarter coins and no chips.
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.setColaInventory(Collections.emptyList());
+		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+
+		// When: press chips button
+		vendingMachine.pressChipsButton();
+		// Then: sold out is displayed
+		assertThat(vendingMachine.viewDisplay(), is(SOLD_OUT));
+		// and: on second look display is back to default message
+		assertThat(vendingMachine.viewDisplay(), is("$0.75"));
+	}
+
+	@Test
+	public void testDisplaySoldOut_fullPayment_chips() {
+		// Given: a vending machine with 4 quarter coins and no chips.
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.setColaInventory(Collections.emptyList());
+		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+
+		// When: press chips button
+		vendingMachine.pressChipsButton();
+		// Then: sold out is displayed
+		assertThat(vendingMachine.viewDisplay(), is(SOLD_OUT));
+		// and: on second look display is back to default message
+		assertThat(vendingMachine.viewDisplay(), is("$1.00"));
+	}
+	@Test
+	public void testDisplaySoldOut_noPayment_candy() {
+		// Given: a vending machine with no coins and no candy.
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.setColaInventory(Collections.emptyList());
+		// When: press candy button
+		vendingMachine.pressCandyButton();
+		// Then: sold out is displayed
+		assertThat(vendingMachine.viewDisplay(), is(SOLD_OUT));
+		// and: on second look display is back to default message
+		assertThat(vendingMachine.viewDisplay(), is(INSERT_COIN));
+	}
+
+	@Test
+	public void testDisplaySoldOut_partialPayment_candy() {
+		// Given: a vending machine with 3 quarter coins and no candy.
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.setColaInventory(Collections.emptyList());
+		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+
+		// When: press Cola button
+		vendingMachine.pressColaButton();
+		// Then: sold out is displayed
+		assertThat(vendingMachine.viewDisplay(), is(SOLD_OUT));
+		// and: on second look display is back to default message
+		assertThat(vendingMachine.viewDisplay(), is("$0.75"));
+	}
+
+	@Test
+	public void testDisplaySoldOut_fullPayment_candy() {
+		// Given: a vending machine with 4 quarter coins and no candy.
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.setColaInventory(Collections.emptyList());
+		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+
+		// When: press candy button
+		vendingMachine.pressCandyButton();
 		// Then: sold out is displayed
 		assertThat(vendingMachine.viewDisplay(), is(SOLD_OUT));
 		// and: on second look display is back to default message
