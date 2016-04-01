@@ -6,6 +6,10 @@ import static com.valinlore.kata.vending.domain.VendingMachineTestUtils.*;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * This test is for the kata found
  * <a href="https://github.com/guyroyse/vending-machine-kata">here</a>.
@@ -25,6 +29,8 @@ public class VendingMachine_UserStory_SelectProductTest {
 	public void testDisplayPrice_cola() {
 		// Given: a vending machine with no coins.
 		VendingMachine vendingMachine = new VendingMachine();
+		// and: there is product to vend
+		vendingMachine.setColaInventory(Arrays.asList(new Cola()));
 		// When: press cola button
 		vendingMachine.pressColaButton();
 		// Then: Price of cola is displayed
@@ -40,6 +46,8 @@ public class VendingMachine_UserStory_SelectProductTest {
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		// and: there is product to vend
+		vendingMachine.setColaInventory(Arrays.asList(new Cola()));
 
 		// When: press Cola button
 		vendingMachine.pressColaButton();
@@ -57,6 +65,8 @@ public class VendingMachine_UserStory_SelectProductTest {
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		// and: there is product to vend
+		vendingMachine.setColaInventory(Arrays.asList(new Cola()));
 
 		// When: press Cola button
 		vendingMachine.pressColaButton();
@@ -73,6 +83,8 @@ public class VendingMachine_UserStory_SelectProductTest {
 	public void testDisplayPrice_chips() {
 		// Given: a vending machine with no coins.
 		VendingMachine vendingMachine = new VendingMachine();
+		// and: there is product to vend
+		vendingMachine.setChipsInventory(Arrays.asList(new Chips()));
 		// When: pres chips button
 		vendingMachine.pressChipsButton();
 		// Then: Price of chips is displayed
@@ -86,6 +98,8 @@ public class VendingMachine_UserStory_SelectProductTest {
 		// Given: a vending machine with 1 quarter coins.
 		VendingMachine vendingMachine = new VendingMachine();
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		// and: there is product to vend
+		vendingMachine.setChipsInventory(Arrays.asList(new Chips()));
 
 		// When: press chips button
 		vendingMachine.pressChipsButton();
@@ -101,6 +115,8 @@ public class VendingMachine_UserStory_SelectProductTest {
 		VendingMachine vendingMachine = new VendingMachine();
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		// and: there is product to vend
+		vendingMachine.setChipsInventory(Arrays.asList(new Chips()));
 
 		// When: press Cola button
 		vendingMachine.pressChipsButton();
@@ -117,6 +133,9 @@ public class VendingMachine_UserStory_SelectProductTest {
 	public void testDisplayPrice_candy() {
 		// Given: a vending machine with no coins.
 		VendingMachine vendingMachine = new VendingMachine();
+		// and: there is product to vend
+		vendingMachine.setCandyInventory(Arrays.asList(new Candy()));
+
 		// When: press candy button
 		vendingMachine.pressCandyButton();
 		// Then: Price of candy is displayed
@@ -131,6 +150,8 @@ public class VendingMachine_UserStory_SelectProductTest {
 		VendingMachine vendingMachine = new VendingMachine();
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		// and: there is product to vend
+		vendingMachine.setCandyInventory(Arrays.asList(new Candy()));
 
 		// When: press Cola button
 		vendingMachine.pressCandyButton();
@@ -148,6 +169,8 @@ public class VendingMachine_UserStory_SelectProductTest {
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.DIME));
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.NICKEL));
+		// and: there is product to vend
+		vendingMachine.setCandyInventory(Arrays.asList(new Candy()));
 
 		// When: press Cola button
 		vendingMachine.pressCandyButton();
@@ -159,5 +182,4 @@ public class VendingMachine_UserStory_SelectProductTest {
 		// and: on second look display is back to default message
 		assertThat(vendingMachine.viewDisplay(), is(INSERT_COIN));
 	}
-
 }

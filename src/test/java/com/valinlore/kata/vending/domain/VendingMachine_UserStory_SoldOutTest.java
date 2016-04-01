@@ -48,9 +48,9 @@ public class VendingMachine_UserStory_SoldOutTest {
 
 		// When: press Cola button
 		vendingMachine.pressColaButton();
-		// Then: Price of cola is displayed
+		// Then: sold out is displayed
 		assertThat(vendingMachine.viewDisplay(), is(SOLD_OUT));
-		// and: on second look display is back to amount inserted message
+		// and: on second look display is back to default message
 		assertThat(vendingMachine.viewDisplay(), is("$0.75"));
 	}
 
@@ -66,10 +66,7 @@ public class VendingMachine_UserStory_SoldOutTest {
 
 		// When: press Cola button
 		vendingMachine.pressColaButton();
-		// Then: Cola is despensed
-		Product product = vendingMachine.takeProduct();
-		assertThat(product, instanceOf(Cola.class));
-		// and: Thank you message is displayed
+		// Then: sold out is displayed
 		assertThat(vendingMachine.viewDisplay(), is(SOLD_OUT));
 		// and: on second look display is back to default message
 		assertThat(vendingMachine.viewDisplay(), is("$1.00"));

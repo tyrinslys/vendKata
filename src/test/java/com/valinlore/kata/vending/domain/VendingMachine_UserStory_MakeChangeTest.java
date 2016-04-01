@@ -6,6 +6,8 @@ import static com.valinlore.kata.vending.domain.VendingMachineTestUtils.*;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 
+import java.util.Arrays;
+
 /**
  * This test is for the kata found
  * <a href="https://github.com/guyroyse/vending-machine-kata">here</a>.
@@ -29,6 +31,9 @@ public class VendingMachine_UserStory_MakeChangeTest {
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		// and: there is product to vend
+		vendingMachine.setColaInventory(Arrays.asList(new Cola()));
+
 		// When: press cola button
 		vendingMachine.pressColaButton();
 		// Then: change is made
@@ -47,6 +52,9 @@ public class VendingMachine_UserStory_MakeChangeTest {
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		// and: there is product to vend
+		vendingMachine.setChipsInventory(Arrays.asList(new Chips()));
+
 		// When: press chips button
 		vendingMachine.pressChipsButton();
 		// Then: change is made
@@ -68,6 +76,9 @@ public class VendingMachine_UserStory_MakeChangeTest {
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
+		// and: there is product to vend
+		vendingMachine.setCandyInventory(Arrays.asList(new Candy()));
+
 		// When: press cola button
 		vendingMachine.pressCandyButton();
 		// Then: change is made

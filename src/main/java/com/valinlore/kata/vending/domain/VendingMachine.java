@@ -5,8 +5,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class VendingMachine {
+	private static final String SOLD_OUT = "SOLD OUT";
 	private static final String MESSAGE_INSERT_COIN = "INSERT COIN";
 	private static final String MESSAGE_THANK_YOU = "THANK YOU";
 	private String display = MESSAGE_INSERT_COIN;
@@ -14,6 +16,9 @@ public class VendingMachine {
 	private Collection<Coin> internalCoinBin = new ArrayList<>(1);
 	private Collection<Coin> coinsTalliedHolder = new ArrayList<>(1);
 	private Collection<Product> productBin = new ArrayList<>(1);
+	private Collection<Cola> colaInventory = new ArrayList<>(1);
+	private Collection<Chips> chipsInventory = new ArrayList<>(1);
+	private Collection<Candy> candyInventory = new ArrayList<>(1);
 	private int centsTallied;
 	private boolean resetDisplay;
 	private boolean displaySwapped;
@@ -85,7 +90,6 @@ public class VendingMachine {
 	}
 
 	public void pressColaButton() {
-		// Unlimited produt YAY!
 		attemptDespenseProduct(new Cola());
 	}
 
@@ -97,8 +101,21 @@ public class VendingMachine {
 		attemptDespenseProduct(new Chips());
 	}
 
+	private boolean hasInventory(Product product) {
+		if (product instanceof Cola) {
+			return !colaInventory.isEmpty();
+		} else if (product instanceof Chips) {
+			return !chipsInventory.isEmpty();
+		} else if (product instanceof Candy) {
+			return !candyInventory.isEmpty();
+		}
+		return false;
+	}
+
 	private void attemptDespenseProduct(Product product) {
-		if (centsTallied >= product.getCostOfProductInCents()) {
+		if (!hasInventory(product)) {
+			display = SOLD_OUT;
+		} else if (centsTallied >= product.getCostOfProductInCents()) {
 			centsTallied -= product.getCostOfProductInCents();
 			productBin.add(product);
 			makeChange();
@@ -143,16 +160,28 @@ public class VendingMachine {
 		returnCoins();
 		display = MESSAGE_INSERT_COIN;
 	}
-	private void returnCoins(){
+
+	private void returnCoins() {
 		Iterator<Coin> iterator = coinsTalliedHolder.iterator();
-		while(iterator.hasNext()){
+		while (iterator.hasNext()) {
 			coinReturn.add(iterator.next());
 			iterator.remove();
 		}
 	}
 
-	public void setColaInventory(List<Cola> asList) {
-		// TODO Auto-generated method stub
-		
+	public void setColaInventory(List<Cola> colas) {
+		if (colas != null) {
+			colaInventory.addAll(colas);
+		}
+	}
+	public void setChipsInventory(List<Chips> bagsOfChips) {
+		if (bagsOfChips != null) {
+			chipsInventory.addAll(bagsOfChips);
+		}
+	}
+	public void setCandyInventory(List<Candy> bagsOfCandy) {
+		if (bagsOfCandy != null) {
+			candyInventory.addAll(bagsOfCandy);
+		}
 	}
 }
