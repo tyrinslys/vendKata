@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 public class VendingMachine {
 	private static final String MESSAGE_INSERT_COIN = "INSERT COIN";
@@ -148,5 +149,10 @@ public class VendingMachine {
 			coinReturn.add(iterator.next());
 			iterator.remove();
 		}
+	}
+
+	public void setColaInventory(List<Cola> asList) {
+		// TODO Auto-generated method stub
+		
 	}
 }
