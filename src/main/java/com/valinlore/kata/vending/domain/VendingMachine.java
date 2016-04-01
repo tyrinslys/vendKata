@@ -11,6 +11,7 @@ public class VendingMachine {
 	private String display = MESSAGE_INSERT_COIN;
 	private Collection<Coin> coinReturn = new ArrayList<>(1);
 	private Collection<Coin> internalCoinBin = new ArrayList<>(1);
+	private Collection<Coin> coinsTalliedHolder = new ArrayList<>(1);
 	private Collection<Product> productBin = new ArrayList<>(1);
 	private int centsTallied;
 	private boolean resetDisplay;
@@ -28,7 +29,7 @@ public class VendingMachine {
 		if (determinedCoinType == null) {
 			coinReturn.add(coin);
 		} else {
-			internalCoinBin.add(coin);
+			coinsTalliedHolder.add(coin);
 			updateDisplay(determinedCoinType);
 		}
 	}
@@ -138,7 +139,14 @@ public class VendingMachine {
 	}
 
 	public void pressCoinReturn() {
-		makeChange();
+		returnCoins();
 		display = MESSAGE_INSERT_COIN;
+	}
+	private void returnCoins(){
+		Iterator<Coin> iterator = coinsTalliedHolder.iterator();
+		while(iterator.hasNext()){
+			coinReturn.add(iterator.next());
+			iterator.remove();
+		}
 	}
 }
