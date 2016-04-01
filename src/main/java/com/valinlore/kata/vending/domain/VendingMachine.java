@@ -138,7 +138,7 @@ public class VendingMachine {
 	}
 
 	public void pressCoinReturn() {
-		// TODO Auto-generated method stub
-
+		makeChange();
+		display = MESSAGE_INSERT_COIN;
 	}
 }

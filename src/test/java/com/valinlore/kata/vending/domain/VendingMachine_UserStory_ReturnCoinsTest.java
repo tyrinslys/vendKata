@@ -15,7 +15,7 @@ import static org.hamcrest.Matchers.*;
  * @author Tiris Valinlore
  *
  */
-public class VendingMachine_UserStory_ReturnCoinsTest {
+public class VendingMachine_UserStory_ReturnCoinsTest  {
 	@Test
 	public void testCoinReturn() {
 		// Given: a vending machine with 5 quarter coins.
@@ -51,5 +51,7 @@ public class VendingMachine_UserStory_ReturnCoinsTest {
 		assertThat(coinFromReturn.getSize(), is(AcceptedCoinTypes.QUARTER.getDiameterInMicroMeters()));
 		// and: no more coins in return
 		assertThat(vendingMachine.takeCoinFromReturn(), nullValue());
+		// and: display goes back to default message
+		assertThat(vendingMachine.viewDisplay(), is(INSERT_COIN));
 	}
 }
