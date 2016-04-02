@@ -34,9 +34,23 @@ public class VendingMachine_UserStory_ExactChangeTest {
 		assertThat(vendingMachine.viewDisplay(), is(EXACT_CHANGE_ONLY));
 	}
 	@Test
-	public void testExactChangeMessage_WithNotEnoughChange() {
+	public void testExactChangeMessage_WithNotEnoughChange_case1() {
 		// Given: a vending machine with no coins and 1 nickel
 		VendingMachine vendingMachine = new VendingMachine();
+		addChange(vendingMachine, AcceptedCoinTypes.NICKEL, 1);
+		
+		// When: default state... nothing to do here
+
+		// Then: exact change is displayed
+		assertThat(vendingMachine.viewDisplay(), is(EXACT_CHANGE_ONLY));
+		// and: on second look display is still exact change
+		assertThat(vendingMachine.viewDisplay(), is(EXACT_CHANGE_ONLY));
+	}
+	@Test
+	public void testExactChangeMessage_WithNotEnoughChange_case2() {
+		// Given: a vending machine with no coins and 1 nickel
+		VendingMachine vendingMachine = new VendingMachine();
+		addChange(vendingMachine, AcceptedCoinTypes.DIME, 1);
 		addChange(vendingMachine, AcceptedCoinTypes.NICKEL, 1);
 		
 		// When: default state... nothing to do here

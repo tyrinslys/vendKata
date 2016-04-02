@@ -94,22 +94,22 @@ public class VendingMachine {
 	 * @return
 	 */
 	private boolean exactChangeNeeded() {
-		// check that we have one nickel
-		if (!(change.get(AcceptedCoinTypes.NICKEL).size() >= 1)) {
-			return true;
+		boolean haveEnoughChange = false;
+		int numberOfNickels = change.get(AcceptedCoinTypes.NICKEL).size();
+		// check that we have 4 nickel
+		if (numberOfNickels >= 4) {
+			haveEnoughChange = true;
 		}
 
-		// check that we have 20 cents
-		if (!(change.get(AcceptedCoinTypes.DIME).size() >= 2)
-				&& !(change.get(AcceptedCoinTypes.NICKEL).size() >= 4)) {
-			return true;
+		// check that we have 2 dimes and one nickel
+		if (change.get(AcceptedCoinTypes.DIME).size() >= 2 && change.get(AcceptedCoinTypes.NICKEL).size() >= 1) {
+			haveEnoughChange = true;
 		}
-		// another check that we have 20 cents
-		if (!(change.get(AcceptedCoinTypes.DIME).size() >= 1
-				&& change.get(AcceptedCoinTypes.NICKEL).size() >= 2)) {
-			return true;
+		// check we have 1 dime and 2 nickels
+		if (change.get(AcceptedCoinTypes.DIME).size() >= 1 && change.get(AcceptedCoinTypes.NICKEL).size() >= 2) {
+			haveEnoughChange = true;
 		}
-		return false;
+		return !haveEnoughChange;
 	}
 
 	private void setPriceOnDisplay(int priceInCents) {

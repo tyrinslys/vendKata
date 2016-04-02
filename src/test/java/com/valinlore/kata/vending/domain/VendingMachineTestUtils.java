@@ -23,7 +23,7 @@ public class VendingMachineTestUtils {
 				acceptedCoin.getDiameterInMicroMeters() + addSize);
 	}
 	public static void addChange(VendingMachine vendingMachine, AcceptedCoinTypes coinType, int quantity){
-		for(int index = 0; index <= quantity; index++){
+		for(int index = 0; index < quantity; index++){
 			vendingMachine.addChange(coinType, Arrays.asList(createCoin(coinType)));
 		}
 	}
