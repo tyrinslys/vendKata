@@ -24,6 +24,7 @@ public class VendingMachine_UserStory_AcceptCoinsTest {
 	public void acceptCoins_testThatDisplayWithNoCoins() {
 		// Given: a vending machine with no coins
 		VendingMachine vendingMachine = new VendingMachine();
+		fillTheMachineWithChange(vendingMachine);
 		// When: no coins have been added.
 		// Then: insert coin message is displayed
 		assertThat(vendingMachine.viewDisplay(), is(INSERT_COIN));
@@ -87,6 +88,7 @@ public class VendingMachine_UserStory_AcceptCoinsTest {
 
 		// Given: a vending machine with no coins.
 		VendingMachine vendingMachine = new VendingMachine();
+		fillTheMachineWithChange(vendingMachine);
 		// When: insert a coin
 		vendingMachine.insert(coin);
 		// Then: Insert coin message stays
@@ -103,6 +105,7 @@ public class VendingMachine_UserStory_AcceptCoinsTest {
 
 		// Given: a vending machine with no coins.
 		VendingMachine vendingMachine = new VendingMachine();
+		fillTheMachineWithChange(vendingMachine);
 		// and: insert a coin
 		vendingMachine.insert(coin);
 		// When: I can remove the coin from the machine

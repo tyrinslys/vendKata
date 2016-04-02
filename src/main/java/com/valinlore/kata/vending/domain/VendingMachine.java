@@ -3,6 +3,7 @@ package com.valinlore.kata.vending.domain;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,8 @@ public class VendingMachine {
 	private static final String SOLD_OUT = "SOLD OUT";
 	private static final String MESSAGE_INSERT_COIN = "INSERT COIN";
 	private static final String MESSAGE_THANK_YOU = "THANK YOU";
-	private String display = MESSAGE_INSERT_COIN;
+	private static final String MESSAGE_EXACT_CHANGE = "EXACT CHANGE ONLY";
+	private String display;
 	private Collection<Coin> coinReturn = new ArrayList<>(1);
 	private Collection<Coin> internalCoinBin = new ArrayList<>(1);
 	private Collection<Coin> coinsTalliedHolder = new ArrayList<>(1);
@@ -19,10 +21,18 @@ public class VendingMachine {
 	private Collection<Cola> colaInventory = new ArrayList<>(1);
 	private Collection<Chips> chipsInventory = new ArrayList<>(1);
 	private Collection<Candy> candyInventory = new ArrayList<>(1);
+	private Map<AcceptedCoinTypes, List<Coin>> change = new HashMap<>(3);
 	private int centsTallied;
 	private boolean resetDisplay;
 	private boolean displaySwapped;
 	private boolean displayThankYouMessage;
+
+	public VendingMachine() {
+		change.put(AcceptedCoinTypes.QUARTER, new ArrayList<>(1));
+		change.put(AcceptedCoinTypes.DIME, new ArrayList<>(1));
+		change.put(AcceptedCoinTypes.NICKEL, new ArrayList<>(1));
+		resetDisplay();
+	}
 
 	/**
 	 * This is how you add money to the machine. If a coin is rejected it will
@@ -67,8 +77,39 @@ public class VendingMachine {
 		if (centsTallied > 0) {
 			setPriceOnDisplay(centsTallied);
 		} else {
-			display = MESSAGE_INSERT_COIN;
+			if (exactChangeNeeded()) {
+				display = MESSAGE_EXACT_CHANGE;
+			} else {
+				display = MESSAGE_INSERT_COIN;
+			}
 		}
+	}
+
+	/**
+	 * largest accepted payment is 25 cents. smallest given is 5 cents so I
+	 * figure if we can despense 20 cents we should be good. Also throw in at
+	 * least one nickel for good measure.
+	 * 
+	 * 
+	 * @return
+	 */
+	private boolean exactChangeNeeded() {
+		// check that we have one nickel
+		if (!(change.get(AcceptedCoinTypes.NICKEL).size() >= 1)) {
+			return true;
+		}
+
+		// check that we have 20 cents
+		if (!(change.get(AcceptedCoinTypes.DIME).size() >= 2)
+				&& !(change.get(AcceptedCoinTypes.NICKEL).size() >= 4)) {
+			return true;
+		}
+		// another check that we have 20 cents
+		if (!(change.get(AcceptedCoinTypes.DIME).size() >= 1
+				&& change.get(AcceptedCoinTypes.NICKEL).size() >= 2)) {
+			return true;
+		}
+		return false;
 	}
 
 	private void setPriceOnDisplay(int priceInCents) {
@@ -174,14 +215,26 @@ public class VendingMachine {
 			colaInventory.addAll(colas);
 		}
 	}
+
 	public void setChipsInventory(List<Chips> bagsOfChips) {
 		if (bagsOfChips != null) {
 			chipsInventory.addAll(bagsOfChips);
 		}
 	}
+
 	public void setCandyInventory(List<Candy> bagsOfCandy) {
 		if (bagsOfCandy != null) {
 			candyInventory.addAll(bagsOfCandy);
 		}
+	}
+
+	public void addChange(AcceptedCoinTypes coinType, List<Coin> coins) {
+		if (coinType == null || coins == null) {
+			return;
+		}
+
+		List<Coin> coinsOfSpecificType = change.get(coinType);
+		coinsOfSpecificType.addAll(coins);
+		resetDisplay();
 	}
 }

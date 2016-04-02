@@ -22,7 +22,7 @@ public class VendingMachine_UserStory_ExactChangeTest {
 	private static final Object EXACT_CHANGE_ONLY = "EXACT CHANGE ONLY";
 
 	@Test
-	public void testDisplaySoldOut_noPayment_cola() {
+	public void testExactChangeMessage_WithNoChange() {
 		// Given: a vending machine with no coins and no change
 		VendingMachine vendingMachine = new VendingMachine();
 		
@@ -32,5 +32,46 @@ public class VendingMachine_UserStory_ExactChangeTest {
 		assertThat(vendingMachine.viewDisplay(), is(EXACT_CHANGE_ONLY));
 		// and: on second look display is still exact change
 		assertThat(vendingMachine.viewDisplay(), is(EXACT_CHANGE_ONLY));
+	}
+	@Test
+	public void testExactChangeMessage_WithNotEnoughChange() {
+		// Given: a vending machine with no coins and 1 nickel
+		VendingMachine vendingMachine = new VendingMachine();
+		addChange(vendingMachine, AcceptedCoinTypes.NICKEL, 1);
+		
+		// When: default state... nothing to do here
+
+		// Then: exact change is displayed
+		assertThat(vendingMachine.viewDisplay(), is(EXACT_CHANGE_ONLY));
+		// and: on second look display is still exact change
+		assertThat(vendingMachine.viewDisplay(), is(EXACT_CHANGE_ONLY));
+	}
+	@Test
+	public void testExactChangeMessage_WithJustEnoughChange_case1() {
+		// Given: a vending machine with no coins and 2 dimes
+		VendingMachine vendingMachine = new VendingMachine();
+		addChange(vendingMachine, AcceptedCoinTypes.DIME, 2);
+		addChange(vendingMachine, AcceptedCoinTypes.NICKEL, 1);
+		
+		// When: default state... nothing to do here
+
+		// Then: exact change is displayed
+		assertThat(vendingMachine.viewDisplay(), is(INSERT_COIN));
+		// and: on second look display is still exact change
+		assertThat(vendingMachine.viewDisplay(), is(INSERT_COIN));
+	}
+	@Test
+	public void testExactChangeMessage_WithJustEnoughChange_case2() {
+		// Given: a vending machine with no coins and 2 dimes
+		VendingMachine vendingMachine = new VendingMachine();
+		addChange(vendingMachine, AcceptedCoinTypes.DIME, 1);
+		addChange(vendingMachine, AcceptedCoinTypes.NICKEL, 2);
+		
+		// When: default state... nothing to do here
+
+		// Then: exact change is displayed
+		assertThat(vendingMachine.viewDisplay(), is(INSERT_COIN));
+		// and: on second look display is still exact change
+		assertThat(vendingMachine.viewDisplay(), is(INSERT_COIN));
 	}
 }

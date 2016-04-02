@@ -26,6 +26,7 @@ public class VendingMachine_UserStory_SoldOutTest {
 		// Given: a vending machine with no coins and no colas.
 		VendingMachine vendingMachine = new VendingMachine();
 		vendingMachine.setColaInventory(Collections.emptyList());
+		fillTheMachineWithChange(vendingMachine);
 		// When: press cola button
 		vendingMachine.pressColaButton();
 		// Then: sold out is displayed
@@ -73,6 +74,7 @@ public class VendingMachine_UserStory_SoldOutTest {
 		// Given: a vending machine with no coins and no chips.
 		VendingMachine vendingMachine = new VendingMachine();
 		vendingMachine.setColaInventory(Collections.emptyList());
+		fillTheMachineWithChange(vendingMachine);
 		// When: press chips button
 		vendingMachine.pressChipsButton();
 		// Then: sold out is displayed
@@ -120,6 +122,7 @@ public class VendingMachine_UserStory_SoldOutTest {
 		// Given: a vending machine with no coins and no candy.
 		VendingMachine vendingMachine = new VendingMachine();
 		vendingMachine.setColaInventory(Collections.emptyList());
+		fillTheMachineWithChange(vendingMachine);
 		// When: press candy button
 		vendingMachine.pressCandyButton();
 		// Then: sold out is displayed

@@ -29,6 +29,7 @@ public class VendingMachine_UserStory_SelectProductTest {
 	public void testDisplayPrice_cola() {
 		// Given: a vending machine with no coins.
 		VendingMachine vendingMachine = new VendingMachine();
+		fillTheMachineWithChange(vendingMachine);
 		// and: there is product to vend
 		vendingMachine.setColaInventory(Arrays.asList(new Cola()));
 		// When: press cola button
@@ -61,6 +62,7 @@ public class VendingMachine_UserStory_SelectProductTest {
 	public void testDespenseProduct_cola() {
 		// Given: a vending machine with 4 quarter coins.
 		VendingMachine vendingMachine = new VendingMachine();
+		fillTheMachineWithChange(vendingMachine);
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
@@ -83,6 +85,7 @@ public class VendingMachine_UserStory_SelectProductTest {
 	public void testDisplayPrice_chips() {
 		// Given: a vending machine with no coins.
 		VendingMachine vendingMachine = new VendingMachine();
+		fillTheMachineWithChange(vendingMachine);
 		// and: there is product to vend
 		vendingMachine.setChipsInventory(Arrays.asList(new Chips()));
 		// When: pres chips button
@@ -113,6 +116,7 @@ public class VendingMachine_UserStory_SelectProductTest {
 	public void testDespenseProduct_chips() {
 		// Given: a vending machine with 4 quarter coins.
 		VendingMachine vendingMachine = new VendingMachine();
+		fillTheMachineWithChange(vendingMachine);
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
 		// and: there is product to vend
@@ -133,6 +137,7 @@ public class VendingMachine_UserStory_SelectProductTest {
 	public void testDisplayPrice_candy() {
 		// Given: a vending machine with no coins.
 		VendingMachine vendingMachine = new VendingMachine();
+		fillTheMachineWithChange(vendingMachine);
 		// and: there is product to vend
 		vendingMachine.setCandyInventory(Arrays.asList(new Candy()));
 
@@ -165,6 +170,7 @@ public class VendingMachine_UserStory_SelectProductTest {
 	public void testDespenseProduct_candy() {
 		// Given: a vending machine with 4 quarter coins.
 		VendingMachine vendingMachine = new VendingMachine();
+		fillTheMachineWithChange(vendingMachine);
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.QUARTER));
 		vendingMachine.insert(createCoin(AcceptedCoinTypes.DIME));
